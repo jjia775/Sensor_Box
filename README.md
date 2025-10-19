@@ -161,7 +161,7 @@ The simulation mimics data produced by multiple sensor boxes and pushes them to 
 2. A `docker-compose.yml` file is provided for local orchestration of the backend, frontend, PostgreSQL, and simulator services.
 
 ```bash
-cd JJproject2
+cd Sensor_Box
 docker compose build --no-cache
 docker compose up
 ```
