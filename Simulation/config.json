@@ -1,0 +1,909 @@
+{
+  "server_url": "http://backend:8000",
+  "server_url2": "http://localhost:8000",
+  "period_seconds": 60,
+  "phase_max_ms": 20000,
+  "max_inflight": 20,
+  "boxes": [
+    {
+      "serial_number": "SNBOX001",
+      "name": "SensorBox1",
+      "location": "LivingRoom",
+      "house_id": "CSADS001",
+      "sensors": [
+        {
+          "name": "temperature",
+          "type": "temperature",
+          "enabled": true,
+          "meta": {
+            "min": -40,
+            "max": 85
+          }
+        },
+        {
+          "name": "humidity",
+          "type": "humidity",
+          "enabled": true,
+          "meta": {
+            "min": 0,
+            "max": 100
+          }
+        },
+        {
+          "name": "co2",
+          "type": "co2",
+          "enabled": true,
+          "meta": {
+            "min": 400,
+            "max": 10000
+          }
+        },
+        {
+          "name": "o2",
+          "type": "o2",
+          "enabled": true,
+          "meta": {
+            "min": 0,
+            "max": 25
+          }
+        },
+        {
+          "name": "co",
+          "type": "co",
+          "enabled": true,
+          "meta": {
+            "min": 0,
+            "max": 500
+          }
+        },
+        {
+          "name": "pm2_5",
+          "type": "pm2_5",
+          "enabled": true,
+          "meta": {
+            "min": 0,
+            "max": 1000
+          }
+        },
+        {
+          "name": "sound_level",
+          "type": "sound_level",
+          "enabled": true,
+          "meta": {
+            "min": 30,
+            "max": 130
+          }
+        },
+        {
+          "name": "no2",
+          "type": "no2",
+          "enabled": true,
+          "meta": {
+            "min": 5,
+            "max": 80
+          }
+        },
+        {
+          "name": "light",
+          "type": "light",
+          "enabled": true,
+          "meta": {
+            "min": 0,
+            "max": 88000
+          }
+        }
+      ],
+      "registered": false
+    },
+    {
+      "serial_number": "SNBOX002",
+      "name": "SensorBox2",
+      "location": "Bedroom",
+      "house_id": "CDDAS002",
+      "sensors": [
+        {
+          "name": "temperature",
+          "type": "temperature",
+          "enabled": true,
+          "meta": {
+            "min": -40,
+            "max": 85
+          }
+        },
+        {
+          "name": "humidity",
+          "type": "humidity",
+          "enabled": true,
+          "meta": {
+            "min": 0,
+            "max": 100
+          }
+        },
+        {
+          "name": "co2",
+          "type": "co2",
+          "enabled": true,
+          "meta": {
+            "min": 400,
+            "max": 10000
+          }
+        },
+        {
+          "name": "o2",
+          "type": "o2",
+          "enabled": true,
+          "meta": {
+            "min": 0,
+            "max": 25
+          }
+        },
+        {
+          "name": "co",
+          "type": "co",
+          "enabled": false,
+          "meta": {
+            "min": 0,
+            "max": 500
+          }
+        },
+        {
+          "name": "pm2_5",
+          "type": "pm2_5",
+          "enabled": true,
+          "meta": {
+            "min": 0,
+            "max": 1000
+          }
+        },
+        {
+          "name": "sound_level",
+          "type": "sound_level",
+          "enabled": false,
+          "meta": {
+            "min": 30,
+            "max": 130
+          }
+        },
+        {
+          "name": "no2",
+          "type": "no2",
+          "enabled": true,
+          "meta": {
+            "min": 5,
+            "max": 80
+          }
+        },
+        {
+          "name": "light",
+          "type": "light",
+          "enabled": true,
+          "meta": {
+            "min": 0,
+            "max": 88000
+          }
+        }
+      ],
+      "registered": false
+    },
+    {
+      "serial_number": "SNBOX003",
+      "name": "SensorBox3",
+      "location": "Kitchen",
+      "house_id": "NJJJP233",
+      "sensors": [
+        {
+          "name": "temperature",
+          "type": "temperature",
+          "enabled": true,
+          "meta": {
+            "min": -40,
+            "max": 85
+          }
+        },
+        {
+          "name": "humidity",
+          "type": "humidity",
+          "enabled": true,
+          "meta": {
+            "min": 0,
+            "max": 100
+          }
+        },
+        {
+          "name": "co2",
+          "type": "co2",
+          "enabled": true,
+          "meta": {
+            "min": 400,
+            "max": 10000
+          }
+        },
+        {
+          "name": "o2",
+          "type": "o2",
+          "enabled": false,
+          "meta": {
+            "min": 0,
+            "max": 25
+          }
+        },
+        {
+          "name": "co",
+          "type": "co",
+          "enabled": true,
+          "meta": {
+            "min": 0,
+            "max": 500
+          }
+        },
+        {
+          "name": "pm2_5",
+          "type": "pm2_5",
+          "enabled": true,
+          "meta": {
+            "min": 0,
+            "max": 1000
+          }
+        },
+        {
+          "name": "sound_level",
+          "type": "sound_level",
+          "enabled": true,
+          "meta": {
+            "min": 30,
+            "max": 130
+          }
+        },
+        {
+          "name": "no2",
+          "type": "no2",
+          "enabled": true,
+          "meta": {
+            "min": 5,
+            "max": 80
+          }
+        },
+        {
+          "name": "light",
+          "type": "light",
+          "enabled": false,
+          "meta": {
+            "min": 0,
+            "max": 88000
+          }
+        }
+      ],
+      "registered": false
+    },
+    {
+      "serial_number": "SNBOX004",
+      "name": "SensorBox4",
+      "location": "Bathroom",
+      "house_id": "NJJJP233",
+      "sensors": [
+        {
+          "name": "temperature",
+          "type": "temperature",
+          "enabled": true,
+          "meta": {
+            "min": -40,
+            "max": 85
+          }
+        },
+        {
+          "name": "humidity",
+          "type": "humidity",
+          "enabled": true,
+          "meta": {
+            "min": 0,
+            "max": 100
+          }
+        },
+        {
+          "name": "co2",
+          "type": "co2",
+          "enabled": true,
+          "meta": {
+            "min": 400,
+            "max": 10000
+          }
+        },
+        {
+          "name": "o2",
+          "type": "o2",
+          "enabled": true,
+          "meta": {
+            "min": 0,
+            "max": 25
+          }
+        },
+        {
+          "name": "co",
+          "type": "co",
+          "enabled": true,
+          "meta": {
+            "min": 0,
+            "max": 500
+          }
+        },
+        {
+          "name": "pm2_5",
+          "type": "pm2_5",
+          "enabled": false,
+          "meta": {
+            "min": 0,
+            "max": 1000
+          }
+        },
+        {
+          "name": "sound_level",
+          "type": "sound_level",
+          "enabled": true,
+          "meta": {
+            "min": 30,
+            "max": 130
+          }
+        },
+        {
+          "name": "no2",
+          "type": "no2",
+          "enabled": false,
+          "meta": {
+            "min": 5,
+            "max": 80
+          }
+        },
+        {
+          "name": "light",
+          "type": "light",
+          "enabled": true,
+          "meta": {
+            "min": 0,
+            "max": 88000
+          }
+        }
+      ],
+      "registered": false
+    },
+    {
+      "serial_number": "SNBOX005",
+      "name": "SensorBox5",
+      "location": "Garage",
+      "house_id": "NJJJP233",
+      "sensors": [
+        {
+          "name": "temperature",
+          "type": "temperature",
+          "enabled": true,
+          "meta": {
+            "min": -40,
+            "max": 85
+          }
+        },
+        {
+          "name": "humidity",
+          "type": "humidity",
+          "enabled": true,
+          "meta": {
+            "min": 0,
+            "max": 100
+          }
+        },
+        {
+          "name": "co2",
+          "type": "co2",
+          "enabled": true,
+          "meta": {
+            "min": 400,
+            "max": 10000
+          }
+        },
+        {
+          "name": "o2",
+          "type": "o2",
+          "enabled": true,
+          "meta": {
+            "min": 0,
+            "max": 25
+          }
+        },
+        {
+          "name": "co",
+          "type": "co",
+          "enabled": true,
+          "meta": {
+            "min": 0,
+            "max": 500
+          }
+        },
+        {
+          "name": "pm2_5",
+          "type": "pm2_5",
+          "enabled": true,
+          "meta": {
+            "min": 0,
+            "max": 1000
+          }
+        },
+        {
+          "name": "sound_level",
+          "type": "sound_level",
+          "enabled": false,
+          "meta": {
+            "min": 30,
+            "max": 130
+          }
+        },
+        {
+          "name": "no2",
+          "type": "no2",
+          "enabled": false,
+          "meta": {
+            "min": 5,
+            "max": 80
+          }
+        },
+        {
+          "name": "light",
+          "type": "light",
+          "enabled": false,
+          "meta": {
+            "min": 0,
+            "max": 88000
+          }
+        }
+      ],
+      "registered": false
+    },
+    {
+      "serial_number": "SNBOX006",
+      "name": "SensorBox6",
+      "location": "Office",
+      "house_id": "NJJJP233",
+      "sensors": [
+        {
+          "name": "temperature",
+          "type": "temperature",
+          "enabled": true,
+          "meta": {
+            "min": -40,
+            "max": 85
+          }
+        },
+        {
+          "name": "humidity",
+          "type": "humidity",
+          "enabled": true,
+          "meta": {
+            "min": 0,
+            "max": 100
+          }
+        },
+        {
+          "name": "co2",
+          "type": "co2",
+          "enabled": true,
+          "meta": {
+            "min": 400,
+            "max": 10000
+          }
+        },
+        {
+          "name": "o2",
+          "type": "o2",
+          "enabled": true,
+          "meta": {
+            "min": 0,
+            "max": 25
+          }
+        },
+        {
+          "name": "co",
+          "type": "co",
+          "enabled": true,
+          "meta": {
+            "min": 0,
+            "max": 500
+          }
+        },
+        {
+          "name": "pm2_5",
+          "type": "pm2_5",
+          "enabled": true,
+          "meta": {
+            "min": 0,
+            "max": 1000
+          }
+        },
+        {
+          "name": "sound_level",
+          "type": "sound_level",
+          "enabled": true,
+          "meta": {
+            "min": 30,
+            "max": 130
+          }
+        },
+        {
+          "name": "no2",
+          "type": "no2",
+          "enabled": true,
+          "meta": {
+            "min": 5,
+            "max": 80
+          }
+        },
+        {
+          "name": "light",
+          "type": "light",
+          "enabled": true,
+          "meta": {
+            "min": 0,
+            "max": 88000
+          }
+        }
+      ],
+      "registered": false
+    },
+    {
+      "serial_number": "SNBOX007",
+      "name": "SensorBox7",
+      "location": "Balcony",
+      "house_id": "NJJJP233",
+      "sensors": [
+        {
+          "name": "temperature",
+          "type": "temperature",
+          "enabled": true,
+          "meta": {
+            "min": -40,
+            "max": 85
+          }
+        },
+        {
+          "name": "humidity",
+          "type": "humidity",
+          "enabled": true,
+          "meta": {
+            "min": 0,
+            "max": 100
+          }
+        },
+        {
+          "name": "co2",
+          "type": "co2",
+          "enabled": true,
+          "meta": {
+            "min": 400,
+            "max": 10000
+          }
+        },
+        {
+          "name": "o2",
+          "type": "o2",
+          "enabled": false,
+          "meta": {
+            "min": 0,
+            "max": 25
+          }
+        },
+        {
+          "name": "co",
+          "type": "co",
+          "enabled": false,
+          "meta": {
+            "min": 0,
+            "max": 500
+          }
+        },
+        {
+          "name": "pm2_5",
+          "type": "pm2_5",
+          "enabled": true,
+          "meta": {
+            "min": 0,
+            "max": 1000
+          }
+        },
+        {
+          "name": "sound_level",
+          "type": "sound_level",
+          "enabled": false,
+          "meta": {
+            "min": 30,
+            "max": 130
+          }
+        },
+        {
+          "name": "no2",
+          "type": "no2",
+          "enabled": true,
+          "meta": {
+            "min": 5,
+            "max": 80
+          }
+        },
+        {
+          "name": "light",
+          "type": "light",
+          "enabled": true,
+          "meta": {
+            "min": 0,
+            "max": 88000
+          }
+        }
+      ],
+      "registered": false
+    },
+    {
+      "serial_number": "SNBOX008",
+      "name": "SensorBox8",
+      "location": "Basement",
+      "house_id": "NJJJP233",
+      "sensors": [
+        {
+          "name": "temperature",
+          "type": "temperature",
+          "enabled": true,
+          "meta": {
+            "min": -40,
+            "max": 85
+          }
+        },
+        {
+          "name": "humidity",
+          "type": "humidity",
+          "enabled": true,
+          "meta": {
+            "min": 0,
+            "max": 100
+          }
+        },
+        {
+          "name": "co2",
+          "type": "co2",
+          "enabled": true,
+          "meta": {
+            "min": 400,
+            "max": 10000
+          }
+        },
+        {
+          "name": "o2",
+          "type": "o2",
+          "enabled": true,
+          "meta": {
+            "min": 0,
+            "max": 25
+          }
+        },
+        {
+          "name": "co",
+          "type": "co",
+          "enabled": true,
+          "meta": {
+            "min": 0,
+            "max": 500
+          }
+        },
+        {
+          "name": "pm2_5",
+          "type": "pm2_5",
+          "enabled": true,
+          "meta": {
+            "min": 0,
+            "max": 1000
+          }
+        },
+        {
+          "name": "sound_level",
+          "type": "sound_level",
+          "enabled": false,
+          "meta": {
+            "min": 30,
+            "max": 130
+          }
+        },
+        {
+          "name": "no2",
+          "type": "no2",
+          "enabled": true,
+          "meta": {
+            "min": 5,
+            "max": 80
+          }
+        },
+        {
+          "name": "light",
+          "type": "light",
+          "enabled": false,
+          "meta": {
+            "min": 0,
+            "max": 88000
+          }
+        }
+      ],
+      "registered": false
+    },
+    {
+      "serial_number": "SNBOX009",
+      "name": "SensorBox9",
+      "location": "Attic",
+      "house_id": "NJJJP233",
+      "sensors": [
+        {
+          "name": "temperature",
+          "type": "temperature",
+          "enabled": true,
+          "meta": {
+            "min": -40,
+            "max": 85
+          }
+        },
+        {
+          "name": "humidity",
+          "type": "humidity",
+          "enabled": true,
+          "meta": {
+            "min": 0,
+            "max": 100
+          }
+        },
+        {
+          "name": "co2",
+          "type": "co2",
+          "enabled": true,
+          "meta": {
+            "min": 400,
+            "max": 10000
+          }
+        },
+        {
+          "name": "o2",
+          "type": "o2",
+          "enabled": false,
+          "meta": {
+            "min": 0,
+            "max": 25
+          }
+        },
+        {
+          "name": "co",
+          "type": "co",
+          "enabled": false,
+          "meta": {
+            "min": 0,
+            "max": 500
+          }
+        },
+        {
+          "name": "pm2_5",
+          "type": "pm2_5",
+          "enabled": true,
+          "meta": {
+            "min": 0,
+            "max": 1000
+          }
+        },
+        {
+          "name": "sound_level",
+          "type": "sound_level",
+          "enabled": true,
+          "meta": {
+            "min": 30,
+            "max": 130
+          }
+        },
+        {
+          "name": "no2",
+          "type": "no2",
+          "enabled": true,
+          "meta": {
+            "min": 5,
+            "max": 80
+          }
+        },
+        {
+          "name": "light",
+          "type": "light",
+          "enabled": true,
+          "meta": {
+            "min": 0,
+            "max": 88000
+          }
+        }
+      ],
+      "registered": false
+    },
+    {
+      "serial_number": "SNBOX010",
+      "name": "SensorBox10",
+      "location": "Garden",
+      "house_id": "NJJJP233",
+      "sensors": [
+        {
+          "name": "temperature",
+          "type": "temperature",
+          "enabled": true,
+          "meta": {
+            "min": -40,
+            "max": 85
+          }
+        },
+        {
+          "name": "humidity",
+          "type": "humidity",
+          "enabled": true,
+          "meta": {
+            "min": 0,
+            "max": 100
+          }
+        },
+        {
+          "name": "co2",
+          "type": "co2",
+          "enabled": true,
+          "meta": {
+            "min": 400,
+            "max": 10000
+          }
+        },
+        {
+          "name": "o2",
+          "type": "o2",
+          "enabled": true,
+          "meta": {
+            "min": 0,
+            "max": 25
+          }
+        },
+        {
+          "name": "co",
+          "type": "co",
+          "enabled": true,
+          "meta": {
+            "min": 0,
+            "max": 500
+          }
+        },
+        {
+          "name": "pm2_5",
+          "type": "pm2_5",
+          "enabled": true,
+          "meta": {
+            "min": 0,
+            "max": 1000
+          }
+        },
+        {
+          "name": "sound_level",
+          "type": "sound_level",
+          "enabled": true,
+          "meta": {
+            "min": 30,
+            "max": 130
+          }
+        },
+        {
+          "name": "no2",
+          "type": "no2",
+          "enabled": true,
+          "meta": {
+            "min": 5,
+            "max": 80
+          }
+        },
+        {
+          "name": "light",
+          "type": "light",
+          "enabled": true,
+          "meta": {
+            "min": 0,
+            "max": 88000
+          }
+        }
+      ],
+      "registered": false
+    }
+  ]
+}

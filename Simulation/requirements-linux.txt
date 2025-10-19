@@ -1,0 +1,21 @@
+# --- Geospatial / scientific stack (Linux-friendly) ---
+numpy>=2.0
+pandas==2.2.3
+geopandas==1.0.1
+shapely==2.1.0
+pyproj==3.7.1
+rasterio==1.4.3
+cartopy==0.24.1
+contextily==1.6.2
+geoplot==0.5.1
+mercantile==1.2.1
+pyogrio==0.10.0
+mapclassify==2.8.1
+xyzservices==2025.1.0
+fastapi==0.115.11
+uvicorn[standard]==0.34.0
+
+# --- Networking / utils commonly used in your sim ---
+httpx[http2]==0.28.1
+python-dotenv==1.1.0
+tqdm==4.67.1

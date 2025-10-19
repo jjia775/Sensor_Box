@@ -1,0 +1,45 @@
+[
+  {
+    "key": "disease1",
+    "name": "D1",
+    "metrics": [
+      "temp",
+      "co2"
+    ]
+  },
+  {
+    "key": "asthma",
+    "name": "D2",
+    "metrics": [
+      "pm25",
+      "no2",
+      "co2",
+      "rh"
+    ]
+  },
+  {
+    "key": "sleep",
+    "name": "Sleep disorder",
+    "metrics": [
+      "noise_night",
+      "light_night",
+      "temp",
+      "rh"
+    ]
+  },
+  {
+    "key": "new d",
+    "name": "New D",
+    "metrics": [
+      "co",
+      "co2",
+      "no2",
+      "light_night",
+      "rh",
+      "pm25",
+      "noise_night",
+      "o2",
+      "temp"
+    ]
+  }
+]

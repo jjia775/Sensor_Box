@@ -1,0 +1,54 @@
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgresql+asyncpg://sensoruser:secret123@db:5432/sensordb
+      - ALEMBIC_DATABASE_URL=postgresql+asyncpg://sensoruser:secret123@db:5432/sensordb
+      - CORS_ORIGINS=http://localhost:5173,http://localhost
+      - SESSION_SECRET=please-change-in-prod
+      - DB_HOST=db
+      - DB_PORT=5432
+      - SIM_CONFIG_PATH=/app/config.json
+      - SIMULATION_API_BASE=http://simulation:8001
+    volumes:
+      - ./Simulation/config.json:/app/config.json
+    depends_on:
+      - db
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend
+
+  simulation:
+    build:
+      context: ./simulation
+      dockerfile: Dockerfile
+    environment:
+      - BACKEND_BASE=http://backend:8000
+    volumes:
+      - ./Simulation/config.json:/app/config.json
+    depends_on:
+      - backend
+
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: sensoruser
+      POSTGRES_PASSWORD: secret123
+      POSTGRES_DB: sensordb
+    ports:
+      - "5432:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+
+volumes:
+  db-data:
