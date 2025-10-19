@@ -89,7 +89,6 @@ from starlette.middleware.sessions import SessionMiddleware
 
 app = FastAPI()
 
-# 允许从环境变量配置多个来源，逗号分隔
 origins = [o.strip() for o in os.getenv("CORS_ORIGINS", "http://localhost:5173").split(",") if o.strip()]
 
 app.add_middleware(
@@ -108,7 +107,6 @@ app.add_middleware(
     https_only=os.getenv("SESSION_HTTPS_ONLY", "false").lower() == "true",
 )
 
-# 路由注册
 app.include_router(sensors.router)
 app.include_router(ingest.router)
 app.include_router(readings.router)

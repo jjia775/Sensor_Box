@@ -38,7 +38,6 @@ This repository contains the end-to-end stack for an indoor environmental qualit
 | `backend/` | FastAPI application, SQLAlchemy models, Alembic migrations, alerting services, and Docker image. |
 | `frontend/` | React + Vite dashboard (HTML/CSS/JS) consuming the FastAPI REST/WebSocket APIs. |
 | `Simulation/` | Python data generator that replays realistic readings for registered sensor boxes. |
-| `scripts/` | Helper utilities for maintenance and automation. |
 
 ## Prerequisites
 
@@ -79,17 +78,16 @@ SESSION_HTTPS_ONLY=false
 # SMTP alerting
 SMTP_HOST=smtp-relay.brevo.com
 SMTP_PORT=587
-SMTP_USER=<your-smtp-user>
-SMTP_PASSWORD=<your-smtp-password>
-SMTP_FROM=sensorbox@example.com
-SMTP_TO=homeowner@example.com
-ADMIN_EMAILS=alerts@example.com
+SMTP_USER=sensorbox2025@gmail.com
+SMTP_PASSWORD=maranmedical01
+SMTP_FROM=sensorbox2025@gmail.com
+SMTP_TO=sensorbox2025@gmail.com
+ADMIN_EMAILS=sensorbox2025@gmail.com
 ```
 
 Adjust credentials, ports, and hostnames to match your PostgreSQL and SMTP setups. Any variable can also be provided through Docker Compose or process managers.
 
 ## Database Setup
-
 1. Start PostgreSQL and create the database user + schema:
    ```sql
    CREATE USER sensoruser WITH PASSWORD 'secret123';
@@ -106,24 +104,6 @@ Adjust credentials, ports, and hostnames to match your PostgreSQL and SMTP setup
    alembic upgrade head
    ```
 
-### Resetting Sensor Data Between Simulation Runs
-
-Before replaying synthetic data, clear previous measurements to avoid duplicate primary keys and mismatched metadata:
-
-```sql
-TRUNCATE TABLE sensor_readings RESTART IDENTITY CASCADE;
-TRUNCATE TABLE sensors RESTART IDENTITY CASCADE;
-TRUNCATE TABLE sensor_configs RESTART IDENTITY CASCADE;
-TRUNCATE TABLE households RESTART IDENTITY CASCADE;
-```
-
-Alternatively, run the helper script:
-
-```bash
-cd backend
-python -m app.reset_db  # drops & recreates the public schema
-alembic upgrade head
-```
 
 ## Backend Setup & Execution
 
@@ -165,7 +145,7 @@ The simulation mimics data produced by multiple sensor boxes and pushes them to 
 
 1. Ensure the backend is running and `sensor_readings`, `sensors`, `sensor_configs`, and `households` tables are empty.
 2. In the dashboard, register a new sensor box with serial number `SNBOX001` and note the generated house ID.
-3. Update every `house_id` entry in `Simulation/config.json` to the new value (keep unregistered boxes flagged with `"registered": false` if desired).
+3. Update every unregistered boxes flagged with `"registered": false` if desired.
 4. Activate the backend environment, then run:
    ```bash
    cd Simulation
@@ -176,11 +156,14 @@ The simulation mimics data produced by multiple sensor boxes and pushes them to 
 
 ## Docker-Based Workflow (Optional)
 
-A `docker-compose.yml` file is provided for local orchestration of the backend, frontend, PostgreSQL, and simulator services.
+1. Download docker first !!!!!
+
+2. A `docker-compose.yml` file is provided for local orchestration of the backend, frontend, PostgreSQL, and simulator services.
 
 ```bash
 cd JJproject2
-docker compose up --build
+docker compose build --no-cache
+docker compose up
 ```
 
 The compose file mounts `Simulation/config.json` into both backend and simulator containers. Override environment variables in the compose file or by creating an `.env` alongside it.
@@ -189,7 +172,6 @@ The compose file mounts `Simulation/config.json` into both backend and simulator
 
 - FastAPI interactive docs: `http://127.0.0.1:8000/docs`
 - Health check: `GET http://127.0.0.1:8000/health`
-- WebSocket updates: `ws://127.0.0.1:8000/ws`
 - SMTP alert testing: `pytest tests/test_alerting_admin.py` (inside `backend/`)
 
 ## Troubleshooting Tips
