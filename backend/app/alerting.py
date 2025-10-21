@@ -90,6 +90,7 @@ class ThresholdBreach:
     sensor_name: str | None
     sensor_serial: str | None
     recorded_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
+    recipients: tuple[str, ...] | None = None
 
 
 @dataclass
@@ -200,12 +201,29 @@ def _open_smtp_connection(settings: SMTPSettings) -> smtplib.SMTP:
     return server
 
 
+def _normalize_recipients(addresses: Sequence[str] | None) -> list[str]:
+    if not addresses:
+        return []
+    seen: set[str] = set()
+    normalized: list[str] = []
+    for addr in addresses:
+        if not isinstance(addr, str):
+            continue
+        trimmed = addr.strip()
+        if not trimmed or trimmed in seen:
+            continue
+        normalized.append(trimmed)
+        seen.add(trimmed)
+    return normalized
+
+
 def _send_all(events: Sequence[ThresholdBreach], settings: SMTPSettings) -> None:
     if not events:
         return
-    if not settings.to_addrs:
-        logger.warning("No SMTP recipients configured; skipping alerts")
-        return
+
+    fallback_recipients = _normalize_recipients(settings.to_addrs)
+    if not fallback_recipients:
+        logger.info("No default SMTP recipients configured; relying on event-specific recipients")
 
     try:
         server = _open_smtp_connection(settings)
@@ -216,9 +234,18 @@ def _send_all(events: Sequence[ThresholdBreach], settings: SMTPSettings) -> None
     try:
         for event in events:
             try:
+                recipients = _normalize_recipients(event.recipients)
+                if not recipients:
+                    recipients = list(fallback_recipients)
+                if not recipients:
+                    logger.warning(
+                        "No recipients configured for alert on metric '%s'; skipping",
+                        event.metric,
+                    )
+                    continue
                 msg = EmailMessage()
                 msg["From"] = settings.from_addr
-                msg["To"] = ", ".join(settings.to_addrs)
+                msg["To"] = ", ".join(recipients)
                 msg["Subject"] = _format_subject(event)
                 msg.set_content(_format_body(event))
                 server.send_message(msg)
@@ -232,7 +259,8 @@ def _send_all(events: Sequence[ThresholdBreach], settings: SMTPSettings) -> None
 
 
 def _send_message(subject: str, body: str, settings: SMTPSettings, recipients: Sequence[str]) -> None:
-    if not recipients:
+    normalized_recipients = _normalize_recipients(recipients)
+    if not normalized_recipients:
         logger.warning("No SMTP recipients configured; skipping email with subject '%s'", subject)
         return
 
@@ -245,7 +273,7 @@ def _send_message(subject: str, body: str, settings: SMTPSettings, recipients: S
     try:
         msg = EmailMessage()
         msg["From"] = settings.from_addr
-        msg["To"] = ", ".join(recipients)
+        msg["To"] = ", ".join(normalized_recipients)
         msg["Subject"] = subject
         msg.set_content(body)
         server.send_message(msg)
@@ -264,7 +292,7 @@ async def send_simple_email(
     """Send a simple e-mail message using the configured SMTP settings."""
 
     settings = load_smtp_settings()
-    recipients = [addr.strip() for addr in (to_addrs or settings.to_addrs) if addr.strip()]
+    recipients = _normalize_recipients(to_addrs or settings.to_addrs)
     if not recipients:
         logger.warning("No SMTP recipients configured; skipping email with subject '%s'", subject)
         return

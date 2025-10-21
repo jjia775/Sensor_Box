@@ -13,7 +13,7 @@ from ..alerting import (
     get_metric_unit,
 )
 from ..deps import get_db
-from ..models import Sensor, SensorReading
+from ..models import Household, Sensor, SensorReading
 
 router = APIRouter(tags=["ingest"])
 
@@ -51,6 +51,13 @@ async def ingest(payload: Union[dict, List[dict]], db: AsyncSession = Depends(ge
         sensor_rows = await db.execute(stmt)
         sensors = {sensor.id: sensor for sensor in sensor_rows.scalars()}
 
+    owner_ids = {sensor.owner_id for sensor in sensors.values() if sensor and sensor.owner_id}
+    households: dict[int, Household] = {}
+    if owner_ids:
+        stmt = select(Household).where(Household.id.in_(tuple(owner_ids)))
+        household_rows = await db.execute(stmt)
+        households = {household.id: household for household in household_rows.scalars()}
+
     events: list[ThresholdBreach] = []
     filtered: list[dict[str, Any]] = []
     for row in data:
@@ -69,6 +76,17 @@ async def ingest(payload: Union[dict, List[dict]], db: AsyncSession = Depends(ge
         unit = get_metric_unit(metric)
         sensor_serial = sensor.serial_number or attrs.get("serial_number")
         recorded_at = datetime.now(timezone.utc)
+        recipients: tuple[str, ...] | None = None
+        candidate_recipients: list[str] = []
+        if sensor and sensor.owner_id:
+            household = households.get(sensor.owner_id)
+            if household and household.email:
+                email = household.email.strip()
+                if email:
+                    candidate_recipients.append(email)
+        if candidate_recipients:
+            recipients = tuple(dict.fromkeys(candidate_recipients))
+
         for line in triggered:
             try:
                 threshold_value = float(line["value"])
@@ -86,6 +104,7 @@ async def ingest(payload: Union[dict, List[dict]], db: AsyncSession = Depends(ge
                     sensor_name=sensor.name,
                     sensor_serial=sensor_serial,
                     recorded_at=recorded_at,
+                    recipients=recipients,
                 )
             )
 
