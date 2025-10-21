@@ -81,7 +81,6 @@ SMTP_PORT=587
 SMTP_USER=sensorbox2025@gmail.com
 SMTP_PASSWORD=maranmedical01
 SMTP_FROM=sensorbox2025@gmail.com
-SMTP_TO=sensorbox2025@gmail.com
 ADMIN_EMAILS=sensorbox2025@gmail.com
 ```
 
@@ -157,7 +156,6 @@ The simulation mimics data produced by multiple sensor boxes and pushes them to 
 ## Docker-Based Workflow (Optional)
 
 1. Download docker first !!!!!
-
 2. A `docker-compose.yml` file is provided for local orchestration of the backend, frontend, PostgreSQL, and simulator services.
 
 ```bash
