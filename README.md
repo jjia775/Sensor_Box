@@ -47,7 +47,9 @@ Install the following tooling before running the stack locally:
 - **Python 3.11+** (or Anaconda/Miniconda) for the FastAPI backend and simulation harness.
 - **PostgreSQL 13+** with a listening port on `5432`.
 - **DBeaver** (optional) for exploring the database; configure it as shown in `dbsetting-1.png`.
-- (Optional) **Docker & Docker Compose** if you prefer containerized deployment using `docker-compose.yml`.
+- **Docker & Docker Compose** for containerized deployment using `docker-compose.yml`.
+
+All required software can be found in the /Installation Packages/ folder.
 
 ## Configuration Files
 
@@ -86,7 +88,33 @@ ADMIN_EMAILS=sensorbox2025@gmail.com
 
 Adjust credentials, ports, and hostnames to match your PostgreSQL and SMTP setups. Any variable can also be provided through Docker Compose or process managers.
 
-## Database Setup
+
+## Two Methods to Setup and Run the Software
+
+1. With Docker (Recommended): The easiest method. Running docker compose up will build and launch all services (backend, frontend, database, and simulation) automatically. 
+2. Manually (Optional): Running the backend (Python) and frontend (Node.js) servers separately in an IDE (like VSCode).
+
+## Docker-Based Workflow
+
+1. Download Docker first !!!!!
+2. A `docker-compose.yml` file is provided for local orchestration of the backend, frontend, PostgreSQL, and simulator services.
+3. Open Visual Studio Code
+4. Open a new terminal, and type in the following commands:
+
+```bash
+cd Sensor_Box
+docker compose build --no-cache
+docker compose up
+```
+
+The compose file mounts `Simulation/config.json` into both backend and simulator containers. Override environment variables in the compose file or by creating an `.env` alongside it.
+
+5. Wait until Docker Containers are fully comprised
+6. Open Docker Desktop
+7. In "Containers" tab, find "sensor_box-main", and click "Start" under Actions
+8. Open http://localhost:5173/
+
+## Database Setup (Optional)
 1. Start PostgreSQL and create the database user + schema:
    ```sql
    CREATE USER sensoruser WITH PASSWORD 'secret123';
@@ -103,8 +131,7 @@ Adjust credentials, ports, and hostnames to match your PostgreSQL and SMTP setup
    alembic upgrade head
    ```
 
-
-## Backend Setup & Execution
+## Backend Setup & Execution (Optional)
 
 ```bash
 cd backend
@@ -128,7 +155,7 @@ The API is available at `http://127.0.0.1:8000`, with interactive docs at `http:
 uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 ```
 
-## Frontend Setup & Execution
+## Frontend Setup & Execution (Optional)
 
 ```bash
 cd frontend
@@ -138,7 +165,7 @@ npm run dev  # serves the dashboard at http://localhost:5173
 
 Set `VITE_API_BASE` in `frontend/.env` if the backend is accessible through a different hostname or port.
 
-## Simulation Harness
+## Simulation Harness (Optional)
 
 The simulation mimics data produced by multiple sensor boxes and pushes them to the backend ingestion API.
 
@@ -152,19 +179,6 @@ The simulation mimics data produced by multiple sensor boxes and pushes them to 
    python simulation.py
    ```
 5. Monitor the FastAPI logs and dashboard charts for incoming measurements.
-
-## Docker-Based Workflow (Optional)
-
-1. Download docker first !!!!!
-2. A `docker-compose.yml` file is provided for local orchestration of the backend, frontend, PostgreSQL, and simulator services.
-
-```bash
-cd Sensor_Box
-docker compose build --no-cache
-docker compose up
-```
-
-The compose file mounts `Simulation/config.json` into both backend and simulator containers. Override environment variables in the compose file or by creating an `.env` alongside it.
 
 ## Useful Endpoints & Tools
 
