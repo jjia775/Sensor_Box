@@ -98,11 +98,10 @@ Adjust credentials, ports, and hostnames to match your PostgreSQL and SMTP setup
 
 1. Download Docker first !!!!!
 2. A `docker-compose.yml` file is provided for local orchestration of the backend, frontend, PostgreSQL, and simulator services.
-3. Open Visual Studio Code
+3. Open Visual Studio Code, open "Sensor_Box" folder.
 4. Open a new terminal, and type in the following commands:
 
 ```bash
-cd Sensor_Box
 docker compose build --no-cache
 docker compose up
 ```
