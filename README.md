@@ -114,8 +114,8 @@ docker compose up
 The compose file mounts `Simulation/config.json` into both backend and simulator containers. Override environment variables in the compose file or by creating an `.env` alongside it.
 
 5. Wait until Docker Containers are fully comprised
-6. Open Docker Desktop
-7. In "Containers" tab, find "sensor_box-main", and click "Start" under Actions
+6. Open Docker Desktop (Optional)
+7. In "Containers" tab, find "sensor_box-main", and click "Start" under Actions (Optional)
 8. Open http://localhost:5173/
 
 ## Database Setup (Optional)
