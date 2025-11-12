@@ -115,6 +115,9 @@ The compose file mounts `Simulation/config.json` into both backend and simulator
 8. Open http://localhost:5173/
 
 ## Database Setup (Optional)
+
+If you prefer this way, go to /backend/app/.env, uncomment line 6: "; SIMULATION_API_BASE=http://localhost:8001" by removing ";".
+
 1. Start PostgreSQL and create the database user + schema:
    ```sql
    CREATE USER sensoruser WITH PASSWORD 'secret123';
