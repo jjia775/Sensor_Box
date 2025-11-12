@@ -148,8 +148,13 @@ async def update_sensor(sensor_id: UUID, payload: dict[str, Any], db: AsyncSessi
 
     # Support remotely toggling the "enabled" flag
     if "enabled" in payload:
-        obj.meta = obj.meta or {}
-        obj.meta["enabled"] = bool(payload["enabled"])
+        # Reassign the metadata dictionary instead of mutating it in-place so that
+        # SQLAlchemy reliably detects changes to JSONB fields. Without this,
+        # toggling the enabled flag might appear to succeed on the frontend while
+        # the database state (and therefore the ingest behaviour) remains
+        # unchanged.
+        current_meta = obj.meta or {}
+        obj.meta = {**current_meta, "enabled": bool(payload["enabled"])}
 
     await db.commit()
     await db.refresh(obj, attribute_names=["household"])
