@@ -551,6 +551,18 @@ def _stable_phase_seconds(sensor_id: str, max_ms: int) -> float:
 def _should_retry_status(status: int) -> bool:
     return status == 429 or 500 <= status <= 599
 
+
+def _coerce_enabled_flag(value: Any, default: bool = True) -> bool:
+    if value is None:
+        return default
+    if isinstance(value, str):
+        lowered = value.strip().lower()
+        if lowered in {"false", "0", "off", "no"}:
+            return False
+        if lowered in {"true", "1", "on", "yes"}:
+            return True
+    return bool(value)
+
 async def send_reading_with_retry(sensor_id: str, value: float, attributes: dict | None = None, max_retries: int = 3) -> bool:
     client = await get_client()
     sem = _get_sema()
@@ -596,14 +608,23 @@ async def sensor_worker(box_def: dict, s: dict, server_obj: dict, box_env: BoxEn
     while True:
         dt = datetime.now(timezone.utc)
         try:
-            # Skip this cycle if disabled
-            if not s.get("enabled", True):
+            # Generate value: read cached config first, fall back to definition defaults
+            cfg = await fetch_config_with_cache(sid)
+            if not isinstance(cfg, dict):
+                cfg = {}
+
+            # Skip this cycle if either the static config or the server metadata has the
+            # sensor disabled. When the server reports a disabled state, drop the cached
+            # config so that subsequent iterations re-fetch and notice re-enables quickly.
+            static_enabled = _coerce_enabled_flag(s.get("enabled", True))
+            server_enabled = _coerce_enabled_flag(cfg.get("enabled"), default=True)
+            if not static_enabled or not server_enabled:
+                if not server_enabled:
+                    _cfg_cache.pop(str(sid), None)
                 next_tick = _next_tick(anchor, PERIOD_SEC) + phase
                 await _sleep_until(next_tick)
                 continue
 
-            # Generate value: read cached config first, fall back to definition defaults
-            cfg = await fetch_config_with_cache(sid)
             base = s.get("meta") or {}
             lo = float(cfg.get("min", base.get("min", 0)))
             hi = float(cfg.get("max", base.get("max", 1)))
