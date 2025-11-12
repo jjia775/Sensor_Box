@@ -39,7 +39,7 @@ ALIASES: dict[str, list[str]] = {
     "no2": ["no2"],
     "o2": ["o2"],
     "light_night": ["light_night", "light"],
-    "noise_night": ["noise_night", "noise"],
+    "noise_night": ["noise_night", "noise", "noise_dba", "sound_level"],
 }
 
 def _parse_interval(s: str) -> timedelta:
