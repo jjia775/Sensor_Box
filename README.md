@@ -46,7 +46,7 @@ Install the following tooling before running the stack locally:
 - **Node.js 18+** (required for the Vite/React frontend).
 - **Python 3.11+** (or Anaconda/Miniconda) for the FastAPI backend and simulation harness.
 - **PostgreSQL 13+** with a listening port on `5432`.
-- **DBeaver** (optional) for exploring the database; configure it as shown in `dbsetting-1.png`.
+- **DBeaver** (optional) for exploring the database; configure it as shown in `dbsetting.png`.
 - **Docker & Docker Compose** for containerized deployment using `docker-compose.yml`.
 
 All required software can be found in the /Installation Packages/ folder.
