@@ -46,7 +46,7 @@ Install the following tooling before running the stack locally:
 - **Node.js 18+** (required for the Vite/React frontend).
 - **Python 3.11+** (or Anaconda/Miniconda) for the FastAPI backend and simulation harness.
 - **PostgreSQL 13+** with a listening port on `5432`.
-- **DBeaver** (optional) for exploring the database; configure it as shown in `dbsetting.png`; Password: `secret123`.
+- **DBeaver** (optional) for exploring the database; create a new database connection, configure it as shown in `dbsetting.png`; Password: `secret123`.
 - **Docker & Docker Compose** for containerized deployment using `docker-compose.yml`.
 
 All required software can be found in the /Installation Packages/ folder.
@@ -120,8 +120,6 @@ The compose file mounts `Simulation/config.json` into both backend and simulator
 
 ## Database Setup (Optional)
 
-If you prefer this way, go to /backend/app/.env, uncomment line 6: "; SIMULATION_API_BASE=http://localhost:8001" by removing ";" at the beginning.
-
 1. Start PostgreSQL and create the database user + schema:
    ```sql
    CREATE USER sensoruser WITH PASSWORD 'secret123';
@@ -131,7 +129,7 @@ If you prefer this way, go to /backend/app/.env, uncomment line 6: "; SIMULATION
    ```sql
    GRANT ALL PRIVILEGES ON DATABASE sensordb TO sensoruser;
    ```
-3. (Optional) Use DBeaver to connect to `localhost:5432` with the same credentials for inspection.
+3. (Optional) Use DBeaver to connect to `localhost:5432` (refer to `dbsetting.png`, Password: `secret123`) with the same credentials for inspection.
 4. Run Alembic migrations once the backend environment is ready:
    ```bash
    cd backend
@@ -139,6 +137,8 @@ If you prefer this way, go to /backend/app/.env, uncomment line 6: "; SIMULATION
    ```
 
 ## Backend Setup & Execution (Optional)
+
+If you prefer this way, go to /backend/app/.env, uncomment line 6: "; SIMULATION_API_BASE=http://localhost:8001" by removing ";" at the beginning.
 
 ```bash
 cd backend
